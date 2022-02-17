@@ -103,4 +103,3 @@ public class GameManager : MonoBehaviour
         mass = newMass;
     }
 }
- 
