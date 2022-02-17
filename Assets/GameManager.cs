@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
                 currentCard.transform.position = adjustZ;
                 currentCard.tag = "card";
                 sliderObject.SetActive(true);
-                sliderObject.transform.position = worldToUISpace(canvas, adjustZ + new Vector3(3, 0, 0));
+                sliderObject.transform.position = worldToUISpace(canvas, adjustZ + new Vector3(3, 3, 0));
                 mode = "editing";
                 isRotating = true;
                // Debug.Log(sliderObject.transform.position);
@@ -108,6 +108,8 @@ public class GameManager : MonoBehaviour
                // Debug.Log("Done rotating click to spawn another card");
                 sliderObject.SetActive(false);
                 currentCard.GetComponent<Rigidbody>().detectCollisions = true;
+                //currentCard.GetComponent<Rigidbody>().detectCollisions = false;
+
                 mode = "placing";
             }
             else
@@ -128,7 +130,13 @@ public class GameManager : MonoBehaviour
         //else if (Input.GetKeyDown(KeyCode.Return) && isRotating) {
         else if (Input.GetKeyDown(KeyCode.Return))
         {
-         //   Debug.Log("release gravity");
+            cards = GameObject.FindGameObjectsWithTag("card");
+            for (int i = 0; i < cards.Length; ++i)
+            {
+                cards[i].GetComponent<Rigidbody>().detectCollisions = true;
+            }
+
+            //   Debug.Log("release gravity");
             Physics.gravity = new Vector3(0, -10, 0); // reset to standard gravity
             audio.Play();
             mode = "testing";
@@ -156,7 +164,7 @@ public class GameManager : MonoBehaviour
                 mass = currentCard.GetComponent<Rigidbody>().mass;
                 slider.value = mass;
                 sliderObject.SetActive(true);
-                sliderObject.transform.position = worldToUISpace(canvas, currentCard.transform.position + new Vector3(3, 0, 0));
+                sliderObject.transform.position = worldToUISpace(canvas, currentCard.transform.position + new Vector3(3, 3, 0));
                // Debug.Log("card clicked");
                 mode = "editing";
                 currentCard.GetComponent<Rigidbody>().detectCollisions = true;
@@ -193,11 +201,10 @@ public class GameManager : MonoBehaviour
         highestPoint = cards.Last().GetComponent<MeshRenderer>().bounds.center.y + cards.Last().GetComponent<MeshRenderer>().bounds.extents.y;
         highestPoint = Mathf.RoundToInt(highestPoint * 1000);
 
-        scoreText.text = "Score: " + highestPoint.ToString();
+        scoreText.text = "Score: " + highestPoint.ToString() + "\nPress R to play again";
 
 
         mode = "done";
     }
-
 }
  
