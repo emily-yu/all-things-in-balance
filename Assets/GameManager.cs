@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Threading;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Linq;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -11,6 +12,8 @@ public class GameManager : MonoBehaviour
     public Canvas canvas;
     public GameObject enemy;
     public GameObject sliderObject;
+    public GameObject textObject;
+    public UnityEngine.UI.Text scoreText;
     public Slider slider;
     public GameObject[] cards;
     public GameObject currentCard;
@@ -20,6 +23,7 @@ public class GameManager : MonoBehaviour
     // public AudioClip resetSound;
     public bool isRotating;
     public Vector3 rotator;
+    public float highestPoint;
 
     // Start is called before the first frame update
     void Start()
@@ -27,12 +31,17 @@ public class GameManager : MonoBehaviour
         Physics.gravity = Vector3.zero; // init no gravity
         sliderObject = GameObject.Find("Real Slider");
         slider = GameObject.Find("Real Slider").GetComponent<Slider>();
+        textObject = GameObject.Find("Text");
+        scoreText = GameObject.Find("Text").GetComponent<UnityEngine.UI.Text>();
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         currentCard = GameObject.Find("Card");
+        highestPoint = 0;
         mode = "placing";
         sliderObject.SetActive(false);
         isRotating = false;
         audio = GetComponent<AudioSource>();
+        textObject.transform.position = worldToUISpace(canvas, new Vector3(0, -1, 0));
+        
     }
 
     // Update is called once per frame
@@ -52,7 +61,7 @@ public class GameManager : MonoBehaviour
                     currentCard.GetComponent<Rigidbody>().detectCollisions = false;
                 }
 
-                Debug.Log("Hit");
+               // Debug.Log("Hit");
             }
 
             else if (mode == "placing")
@@ -67,7 +76,7 @@ public class GameManager : MonoBehaviour
                 sliderObject.transform.position = worldToUISpace(canvas, adjustZ + new Vector3(3, 0, 0));
                 mode = "editing";
                 isRotating = true;
-                Debug.Log(sliderObject.transform.position);
+               // Debug.Log(sliderObject.transform.position);
             }
 
             else
@@ -81,7 +90,7 @@ public class GameManager : MonoBehaviour
 
             if (Input.GetKey(KeyCode.A))
             {
-                Debug.Log("pressing left arrow");
+               // Debug.Log("pressing left arrow");
                 rotator.z = 30;
                 currentCard.GetComponent<Rigidbody>().detectCollisions = false;
 
@@ -89,14 +98,14 @@ public class GameManager : MonoBehaviour
             }
             else if (Input.GetKey(KeyCode.D))
             {
-                Debug.Log("pressing right arrow");
+                //Debug.Log("pressing right arrow");
                 rotator.z = -30;
                 currentCard.GetComponent<Rigidbody>().detectCollisions = false;
 
             }
             else if (Input.GetKeyDown(KeyCode.W))
             {
-                Debug.Log("Done rotating click to spawn another card");
+               // Debug.Log("Done rotating click to spawn another card");
                 sliderObject.SetActive(false);
                 currentCard.GetComponent<Rigidbody>().detectCollisions = true;
                 mode = "placing";
@@ -119,12 +128,14 @@ public class GameManager : MonoBehaviour
         //else if (Input.GetKeyDown(KeyCode.Return) && isRotating) {
         else if (Input.GetKeyDown(KeyCode.Return))
         {
-            Debug.Log("release gravity");
+         //   Debug.Log("release gravity");
             Physics.gravity = new Vector3(0, -10, 0); // reset to standard gravity
             audio.Play();
+            mode = "testing";
 
             // add scoring functionality here
-            Debug.Log("score");
+            StartCoroutine(calculateScore());
+           // Debug.Log("score");
 
             //Thread.Sleep(5000); // let it just fall
             isRotating = false;
@@ -134,6 +145,8 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
+            mode = "placing";
+            highestPoint = 0;
         }
 
         if (Input.GetMouseButtonUp(0))
@@ -144,7 +157,7 @@ public class GameManager : MonoBehaviour
                 slider.value = mass;
                 sliderObject.SetActive(true);
                 sliderObject.transform.position = worldToUISpace(canvas, currentCard.transform.position + new Vector3(3, 0, 0));
-                Debug.Log("card clicked");
+               // Debug.Log("card clicked");
                 mode = "editing";
                 currentCard.GetComponent<Rigidbody>().detectCollisions = true;
             }
@@ -156,7 +169,7 @@ public class GameManager : MonoBehaviour
     {
         currentCard.GetComponent<Rigidbody>().mass = newMass;
         mass = newMass;
-        Debug.Log("Hi");
+       // Debug.Log("Hi");
     }
 
     public Vector3 worldToUISpace(Canvas parentCanvas, Vector3 worldPos)
@@ -171,6 +184,20 @@ public class GameManager : MonoBehaviour
         return parentCanvas.transform.TransformPoint(movePos);
     }
 
+    public IEnumerator calculateScore()
+    {
+        scoreText.text = "Checking for stability...";
+        yield return new WaitForSecondsRealtime(5);
+        cards = GameObject.FindGameObjectsWithTag("card");
+        cards = cards.OrderBy(card => (card.GetComponent<MeshRenderer>().bounds.center.y + card.GetComponent<MeshRenderer>().bounds.extents.y)).ToArray();
+        highestPoint = cards.Last().GetComponent<MeshRenderer>().bounds.center.y + cards.Last().GetComponent<MeshRenderer>().bounds.extents.y;
+        highestPoint = Mathf.RoundToInt(highestPoint * 1000);
+
+        scoreText.text = "Score: " + highestPoint.ToString();
+
+
+        mode = "done";
+    }
 
 }
  

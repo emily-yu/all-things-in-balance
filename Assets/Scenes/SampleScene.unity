@@ -318,7 +318,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 366949217}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -4, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 27, y: 0.1, z: 1.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -339,6 +339,88 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &368123632
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 368123633}
+  - component: {fileID: 368123635}
+  - component: {fileID: 368123634}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &368123633
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368123632}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1430299082}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &368123634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368123632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 24
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 40
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: "Click to place down a card \nUse the slider to change a card's mass\nPress
+    \"a\" and \"d\" to rotate the selected card\nPress \"w\" to confirm the card's
+    settings\nPress Enter to test your tower against gravity!"
+--- !u!222 &368123635
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368123632}
+  m_CullTransparentMesh: 1
 --- !u!1 &400274229
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,11 +693,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 840036647065356250, guid: 54a4d7a6976fd6b4b8fc9747f72ac7c9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.66
       objectReference: {fileID: 0}
     - target: {fileID: 840036647065356250, guid: 54a4d7a6976fd6b4b8fc9747f72ac7c9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5
+      value: -8.92
       objectReference: {fileID: 0}
     - target: {fileID: 840036647065356250, guid: 54a4d7a6976fd6b4b8fc9747f72ac7c9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -797,7 +879,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 757258640}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.5, y: 3.5, z: 0}
+  m_LocalPosition: {x: -13.5, y: 7.5, z: 0}
   m_LocalScale: {x: 0.1, y: 15, z: 1.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -855,7 +937,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 95
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -881,7 +963,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 6, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1147,6 +1229,8 @@ MonoBehaviour:
   canvas: {fileID: 0}
   enemy: {fileID: 1217753196273173561, guid: 54a4d7a6976fd6b4b8fc9747f72ac7c9, type: 3}
   sliderObject: {fileID: 0}
+  textObject: {fileID: 0}
+  scoreText: {fileID: 0}
   slider: {fileID: 0}
   cards: []
   currentCard: {fileID: 0}
@@ -1154,6 +1238,7 @@ MonoBehaviour:
   mass: 0
   isRotating: 0
   rotator: {x: 0, y: 0, z: 0}
+  heightPoints: 0
 --- !u!4 &1343742191
 Transform:
   m_ObjectHideFlags: 0
@@ -1434,6 +1519,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2121553735}
+  - {fileID: 368123633}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1547,7 +1633,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1710046919}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.5, y: 3.5, z: 0}
+  m_LocalPosition: {x: 13.5, y: 7.5, z: 0}
   m_LocalScale: {x: 0.1, y: 15, z: 1.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1607,7 +1693,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2015877580865809817, guid: 1c4151658ec90d54e861d0a34461ba21, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.12
+      value: -5.65
       objectReference: {fileID: 0}
     - target: {fileID: 2015877580865809817, guid: 1c4151658ec90d54e861d0a34461ba21, type: 3}
       propertyPath: m_LocalPosition.z
